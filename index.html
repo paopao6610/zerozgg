@@ -13,3 +13,119 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FF Diamond Shop</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background: linear-gradient(135deg,#0f0f0f,#1a1a1a);
+  color:white;
+  text-align:center;
+}
+
+.header{
+  padding:30px;
+  font-size:28px;
+  font-weight:bold;
+  background:#ff3b3b;
+}
+
+.container{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:20px;
+}
+
+.card{
+  background:#222;
+  width:280px;
+  margin:10px;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 0 10px rgba(255,0,0,0.3);
+}
+
+.price{
+  color:gold;
+  font-size:18px;
+}
+
+button{
+  margin-top:10px;
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  background:#ff3b3b;
+  color:white;
+  font-size:15px;
+}
+
+.footer{
+  margin-top:30px;
+  font-size:12px;
+  opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">🔥 Free Fire Diamond Shop 🔥</div>
+
+<div class="container">
+
+  <div class="card">
+    💎 100 เพชร
+    <div class="price">30 บาท</div>
+    <button onclick="order(100,30)">สั่งซื้อ</button>
+  </div>
+
+  <div class="card">
+    💎 310 เพชร
+    <div class="price">90 บาท</div>
+    <button onclick="order(310,90)">สั่งซื้อ</button>
+  </div>
+
+  <div class="card">
+    💎 520 เพชร
+    <div class="price">150 บาท</div>
+    <button onclick="order(520,150)">สั่งซื้อ</button>
+  </div>
+
+  <div class="card">
+    💎 1060 เพชร
+    <div class="price">300 บาท</div>
+    <button onclick="order(1060,300)">สั่งซื้อ</button>
+  </div>
+
+</div>
+
+<div class="footer">
+⚠️ ร้านนี้เป็นระบบรับออเดอร์เท่านั้น
+</div>
+
+<script>
+function order(diamond, price){
+  let id = prompt("🔎 กรอก Free Fire ID:");
+  let name = prompt("👤 ชื่อผู้เล่น:");
+
+  if(id && name){
+    alert(
+      "✅ รับออเดอร์แล้ว\\n" +
+      "ID: " + id + "\\n" +
+      "ชื่อ: " + name + "\\n" +
+      "เพชร: " + diamond + "\\n" +
+      "ราคา: " + price + " บาท"
+    );
+  }
+}
+</script>
+
+</body>
+</html>
