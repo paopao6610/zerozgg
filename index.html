@@ -1,64 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My First Game</title>
-</head>
-<body style="text-align:center; font-family:Arial; background:#111; color:white; margin-top:100px;">
-
-<h1>🎮 เว็บเกมของฉัน</h1>
-
-<button onclick="alert('เริ่มเล่นแล้ว! 🎉')">
-กดเริ่มเกม
-</button>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
-<title>FF Diamond Shop</title>
+<title>FF Diamond Pro Shop</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background: linear-gradient(135deg,#0f0f0f,#1a1a1a);
+  background: radial-gradient(circle,#1a1a1a,#000);
   color:white;
   text-align:center;
 }
 
 .header{
-  padding:30px;
+  padding:25px;
   font-size:28px;
   font-weight:bold;
-  background:#ff3b3b;
+  background: linear-gradient(90deg,#ff0000,#ff7300);
 }
 
-.container{
+.grid{
   display:flex;
-  flex-direction:column;
-  align-items:center;
+  flex-wrap:wrap;
+  justify-content:center;
   margin-top:20px;
 }
 
 .card{
   background:#222;
-  width:280px;
+  width:200px;
   margin:10px;
   padding:15px;
   border-radius:12px;
-  box-shadow:0 0 10px rgba(255,0,0,0.3);
+  box-shadow:0 0 15px rgba(255,0,0,0.3);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:scale(1.05);
 }
 
 .price{
   color:gold;
-  font-size:18px;
+  margin-top:5px;
 }
 
 button{
   margin-top:10px;
-  padding:10px 15px;
+  padding:10px;
+  width:100%;
   border:none;
   border-radius:8px;
   background:#ff3b3b;
@@ -66,64 +57,113 @@ button{
   font-size:15px;
 }
 
-.footer{
-  margin-top:30px;
-  font-size:12px;
-  opacity:0.7;
+.popup{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.form{
+  background:#111;
+  padding:20px;
+  border-radius:12px;
+  width:280px;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+  border:none;
+  border-radius:6px;
+}
+
+.send{
+  background:limegreen;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">🔥 Free Fire Diamond Shop 🔥</div>
+<div class="header">🔥 FREE FIRE DIAMOND PRO SHOP 🔥</div>
 
-<div class="container">
+<div class="grid">
 
   <div class="card">
     💎 100 เพชร
     <div class="price">30 บาท</div>
-    <button onclick="order(100,30)">สั่งซื้อ</button>
+    <button onclick="openForm(100,30)">สั่งซื้อ</button>
   </div>
 
   <div class="card">
     💎 310 เพชร
     <div class="price">90 บาท</div>
-    <button onclick="order(310,90)">สั่งซื้อ</button>
+    <button onclick="openForm(310,90)">สั่งซื้อ</button>
   </div>
 
   <div class="card">
     💎 520 เพชร
     <div class="price">150 บาท</div>
-    <button onclick="order(520,150)">สั่งซื้อ</button>
-  </div>
-
-  <div class="card">
-    💎 1060 เพชร
-    <div class="price">300 บาท</div>
-    <button onclick="order(1060,300)">สั่งซื้อ</button>
+    <button onclick="openForm(520,150)">สั่งซื้อ</button>
   </div>
 
 </div>
 
-<div class="footer">
-⚠️ ร้านนี้เป็นระบบรับออเดอร์เท่านั้น
+<!-- ฟอร์ม -->
+<div class="popup" id="popup">
+  <div class="form">
+    <h3>📩 สั่งซื้อ</h3>
+
+    <input id="id" placeholder="Free Fire ID">
+    <input id="name" placeholder="ชื่อ">
+
+    <button class="send" onclick="send()">ส่งออเดอร์</button>
+    <button onclick="closeForm()">ปิด</button>
+  </div>
 </div>
 
 <script>
-function order(diamond, price){
-  let id = prompt("🔎 กรอก Free Fire ID:");
-  let name = prompt("👤 ชื่อผู้เล่น:");
+let selectedDiamond = 0;
+let selectedPrice = 0;
 
-  if(id && name){
-    alert(
-      "✅ รับออเดอร์แล้ว\\n" +
-      "ID: " + id + "\\n" +
-      "ชื่อ: " + name + "\\n" +
-      "เพชร: " + diamond + "\\n" +
-      "ราคา: " + price + " บาท"
-    );
+function openForm(d,p){
+  selectedDiamond = d;
+  selectedPrice = p;
+  document.getElementById("popup").style.display="flex";
+}
+
+function closeForm(){
+  document.getElementById("popup").style.display="none";
+}
+
+function send(){
+  let id = document.getElementById("id").value;
+  let name = document.getElementById("name").value;
+
+  if(!id || !name){
+    alert("กรอกข้อมูลให้ครบ!");
+    return;
   }
+
+  // 🔥 ส่งเข้า LINE (เปลี่ยนลิงก์ webhook ได้)
+  let msg =
+  "🔥 ออเดอร์ใหม่\\n" +
+  "ID: " + id + "\\n" +
+  "ชื่อ: " + name + "\\n" +
+  "เพชร: " + selectedDiamond + "\\n" +
+  "ราคา: " + selectedPrice + " บาท";
+
+  let url = "https://line.me/R/msg/text/?" + encodeURIComponent(msg);
+
+  window.open(url);
+
+  alert("ส่งออเดอร์แล้ว!");
+  closeForm();
 }
 </script>
 
